@@ -6,8 +6,8 @@ class Role
   private $table = 'roles';
 
   // Post Properties
-  public $id;
-  public $name;
+  private $id;
+  private $name;
 
   // Constructor with DB
   public function __construct($db)
@@ -47,5 +47,20 @@ class Role
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $this->name = $row['name'];
+  }
+
+  public function getRoleId()
+  {
+    return $this->id;
+  }
+
+  public function getRoleName()
+  {
+    return $this->name;
+  }
+
+  public function setRoleId($id) 
+  {
+    $this->id = $id;
   }
 }
