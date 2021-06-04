@@ -2,20 +2,20 @@
 class Quiz
 {
     // DB stuff
-    private $conn;
+    private $connection;
     private $table = 'quizes';
 
     // Quiz Properties
     private $id;
     private $title;
     private $description;
-    private $level_id;
-    private $max_score;
+    private $levelId;
+    private $maxScore;
 
     // Constructor with DB
     public function __construct($db)
     {
-        $this->conn = $db;
+        $this->connection = $db;
     }
 
     // Get Quizes
@@ -25,12 +25,32 @@ class Quiz
         $query = 'SELECT name FROM' . $this->table;
 
         // Prepare statement
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->connection->prepare($query);
 
         // Execute query
         $stmt->execute();
 
         return $stmt;
+    }
+
+    public function createQuiz($id, $title, $description, $levelId, $maxScore)
+    {
+        $query = $this->insertQuizQuery($id, $title, $description, $levelId, $maxScore);
+
+        if ($query["success"]) {
+            $quiz = $query["data"]->fetch(PDO::FETCH_ASSOC);
+            $quizLevel = new Level($this->connection);
+
+            $this->id = $quiz["id"];
+            $this->title = $quiz["title"];
+            $this->description = $quiz["description"];
+            $this->maxScore = $quiz["maxScore"];
+            $this->level = $quizLevel->getLevelById($quiz["levelId"])["name"];
+
+            return $query;
+        } else {
+            return $query;
+        }
     }
 
     public function getId()
@@ -50,7 +70,7 @@ class Quiz
 
     public function getLevelId()
     {
-        return $this->level_id;
+        return $this->levelId;
     }
 
     public function getMaxScore()
@@ -73,13 +93,37 @@ class Quiz
         $this->description = $description;
     }
 
-    public function setLevelId($level_id)
+    public function setLevelId($levelId)
     {
-        $this->level_id = $level_id;
+        $this->levelId = $levelId;
     }
 
-    public function setMaxScore($max_score)
+    public function setMaxScore($maxScore)
     {
-        $this->max_score = $max_score;
+        $this->maxScore = $maxScore;
+    }
+
+    public function __toString()
+    {
+        return "{$this->id}" + ' ' .
+            "{$this->description}";
+    }
+
+    private function insertQuizQuery($id, $title, $descriptions, $levelId, $maxScore)
+    {
+        try {
+            $this->connection->beginTransaction();
+
+            $sql = "INSERT INTO quizes (id, title, description, levelId, maxScore) VALUES (:id, :title, :description, :levelId, :maxScore)";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute([$id, $title, $descriptions, $levelId, $maxScore]);
+
+            $this->connection->commit();
+
+            return ["success" => true, "data" => $stmt];
+        } catch (PDOException $e) {
+            $this->connection->rollBack();
+            return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+        }
     }
 }
