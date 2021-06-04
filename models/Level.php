@@ -5,9 +5,9 @@ class Level
     private $conn;
     private $table = 'levels';
 
-    // Post Properties
-    public $id;
-    public $name;
+    // Level Properties
+    private $id;
+    private $name;
 
     // Constructor with DB
     public function __construct($db)
@@ -47,5 +47,25 @@ class Level
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $this->name = $row['name'];
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }
