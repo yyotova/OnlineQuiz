@@ -22,9 +22,9 @@ $id = uniqid();
 $title = isset($data['title']) ? CommonFunction::testInput($data['title']) : '';
 $description = isset($data['description']) ? CommonFunction::testInput($data['description']) : '';
 $maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore']) : 0;
-$levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : '';
+$levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : 0;
 
-$quiz->createQuiz($id, $title, $description, $maxScore, $levelId);
+$quiz->createQuiz($id, $title, $description, $levelId, $maxScore);
 
 // Make JSON
 print_r(json_encode($quiz));

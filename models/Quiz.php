@@ -1,4 +1,7 @@
 <?php
+
+include_once('Level.php');
+
 class Quiz
 {
     // DB stuff
@@ -38,17 +41,21 @@ class Quiz
         $query = $this->insertQuizQuery($id, $title, $description, $levelId, $maxScore);
 
         if ($query["success"]) {
-            $quiz = $query["data"]->fetch(PDO::FETCH_ASSOC);
-            $quizLevel = new Level($this->connection);
+            $quiz = $query["data"];
 
+            $quizLevel = new Level($this->connection);
+         
             $this->id = $quiz["id"];
             $this->title = $quiz["title"];
             $this->description = $quiz["description"];
             $this->maxScore = $quiz["maxScore"];
-            $this->level = $quizLevel->getLevelById($quiz["levelId"])["name"];
+            $this->levelId = $quiz["levelId"];
+            
+            print_r($query);
 
             return $query;
         } else {
+            print_r($query);
             return $query;
         }
     }
@@ -109,20 +116,36 @@ class Quiz
             "{$this->description}";
     }
 
-    private function insertQuizQuery($id, $title, $descriptions, $levelId, $maxScore)
+    private function insertQuizQuery($id, $title, $description, $levelId, $maxScore)
     {
         try {
             $this->connection->beginTransaction();
 
-            $sql = "INSERT INTO quizes (id, title, description, levelId, maxScore) VALUES (:id, :title, :description, :levelId, :maxScore)";
+            $sql = "INSERT INTO quizes(id, title, description, level_id, max_score) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($sql);
-            $stmt->execute([$id, $title, $descriptions, $levelId, $maxScore]);
+           
+            $stmt->bindValue(1, $id, PDO::PARAM_STR);
+            $stmt->bindValue(2, $title, PDO::PARAM_STR);
+            $stmt->bindValue(3, $description, PDO::PARAM_STR);
+            $stmt->bindValue(4, $levelId, PDO::PARAM_STR);
+            $stmt->bindValue(5, $maxScore, PDO::PARAM_INT);
+           
+            $stmt->execute([$id, $title, $description, $levelId, $maxScore]);
 
             $this->connection->commit();
 
-            return ["success" => true, "data" => $stmt];
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $row['id'] = $id;
+            $row['title'] = $title;
+            $row['description'] = $description;
+            $row['levelId'] = $levelId;
+            $row['maxScore'] = $maxScore;
+          
+            return ["success" => true, "data" => $row];
         } catch (PDOException $e) {
             $this->connection->rollBack();
+            echo 'here';
             return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
         }
     }
