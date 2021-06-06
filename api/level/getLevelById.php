@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 include_once '../../config/DB.php';
 include_once '../../models/Level.php';
 include_once '../../utils/CommonFunction.php';
+include_once '../../utils/ErrorMessages.php';
 
 // Instantiate DB & connect
 $database = new DB();
@@ -16,9 +17,7 @@ $result;
 try {
     $id = $_GET['id'];
 
-    if (empty($id)) {
-        throw new InvalidArgumentException('Level ID should be provided!');
-    }
+    CommonFunction::throwIfDataIsEmpty($id, ErrorMessages::LEVEL_ID_ERROR_MESSAGE);
 
     $level = $level->getLevelById($id);
 

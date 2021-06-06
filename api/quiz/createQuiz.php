@@ -7,6 +7,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 include_once '../../config/DB.php';
 include_once '../../models/Quiz.php';
 include_once '../../utils/CommonFunction.php';
+include_once '../../utils/ErrorMessages.php';
 
 // Instantiate DB & connect
 $database = new DB();
@@ -18,12 +19,11 @@ $data = json_decode(file_get_contents('php://input'), true);
 $quiz = new Quiz($db);
 $result;
 
-// TODO: check for empty params
 $id = uniqid();
 $title = isset($data['title']) ? CommonFunction::testInput($data['title']) : '';
 $description = isset($data['description']) ? CommonFunction::testInput($data['description']) : '';
-$maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore']) : 0;
-$levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : 0;
+$maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore']) : '';
+$levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : '';
 
 try {
     $quiz = $quiz->createQuiz($id, $title, $description, $levelId, $maxScore);
@@ -36,4 +36,12 @@ try {
 } finally {
     print_r($result);
     return $result;
+}
+
+function validateParams($title, $description, $levelId, $maxScore)
+{
+    CommonFunction::throwIfDataIsEmpty($title, ErrorMessages::QUIZ_TITLE_ERROR_MESSAGE);
+    CommonFunction::throwIfDataIsEmpty($description, ErrorMessages::QUIZ_DESCRIPTION_ERROR_MESSAGE);
+    CommonFunction::throwIfDataIsEmpty($levelId, ErrorMessages::LEVEL_ID_ERROR_MESSAGE);
+    CommonFunction::throwIfDataIsEmpty($maxScore, ErrorMessages::QUIZ_MAXSCORE_ERROR_MESSAGE);
 }
