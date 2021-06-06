@@ -4,18 +4,14 @@ include_once('Level.php');
 
 class Quiz
 {
-    // DB stuff
     private $connection;
-    private $table = 'quizes';
 
-    // Quiz Properties
     private $id;
     private $title;
     private $description;
     private $levelId;
     private $maxScore;
 
-    // Constructor with DB
     public function __construct($db)
     {
         $this->connection = $db;

@@ -1,22 +1,28 @@
 <?php
+
+include_once('Quiz.php');
+
 class Question
 {
-    private $conn;
+    private $connection;
 
     private $id;
     private $title;
     private $points;
-    private $quiz_id;
+    private $quizId;
     private $picture;
 
     public function __construct($db)
     {
-        $this->conn = $db;
+        $this->connection = $db;
     }
 
-    public function createQuestion($id, $title, $points, $QuizId, $picture)
+    public function createQuestion($id, $title, $points, $quizId, $picture)
     {
-       
+        $quiz = new Quiz($this->connection);
+        $quiz->getQuizById($quizId);
+
+        return $this->insertQuestionQuery($id, $title, $points, $quizId, $picture);
     }
 
     public function getId()
@@ -36,7 +42,7 @@ class Question
 
     public function getQuizId()
     {
-        return $this->quiz_id;
+        return $this->quizId;
     }
 
     public function getPicture()
@@ -59,13 +65,41 @@ class Question
         $this->points = $points;
     }
 
-    public function setQuizId($quiz_id)
+    public function setQuizId($quizId)
     {
-        $this->quiz_id = $quiz_id;
+        $this->quizId = $quizId;
     }
 
     public function setPicture($picture)
     {
         $this->picture = $picture;
+    }
+
+    private function insertQuestionQuery($id, $title, $points, $quizId, $picture)
+    {
+        $this->connection->beginTransaction();
+
+        $sql = "INSERT INTO questions(id, title, points, quiz_id, picture) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->bindValue(1, $id, PDO::PARAM_STR);
+        $stmt->bindValue(2, $title, PDO::PARAM_STR);
+        $stmt->bindValue(3, $points, PDO::PARAM_STR);
+        $stmt->bindValue(4, $quizId, PDO::PARAM_STR);
+        $stmt->bindValue(5, $picture, PDO::PARAM_INT);
+
+        $stmt->execute([$id, $title, $points, $quizId, $picture]);
+
+        $this->connection->commit();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $row['id'] = $id;
+        $row['title'] = $title;
+        $row['points'] = $points;
+        $row['quizId'] = $quizId;
+        $row['picture'] = $picture;
+
+        return $row;
     }
 }
