@@ -1,51 +1,49 @@
 <?php
 class Level
 {
-    // DB stuff
     private $conn;
-    private $table = 'levels';
 
-    // Post Properties
-    public $id;
-    public $name;
+    private $id;
+    private $name;
 
-    // Constructor with DB
     public function __construct($db)
     {
         $this->conn = $db;
     }
 
-    // Get Levels
-    public function getLevels()
+    public function getLevelById($id)
     {
-        // Create query
-        $query = 'SELECT name FROM' . $this->table;
+        $sql = 'SELECT * FROM levels WHERE id = ?';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $id, PDO::PARAM_STR);
+        $stmt->execute([$id]);
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
+        $level = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Execute query
-        $stmt->execute();
+        if (empty($level)) {
+            throw new InvalidArgumentException('Level with id ' . $id . ' does not exist!');
+        }
 
-        return $stmt;
+        return $level;
     }
 
-    // Get Single Level
-    public function getLevelById()
+    public function getId()
     {
-        // Create query
-        $query = 'SELECT * FROM ' . $this->table . '
-                  WHERE
-                    id = ?
-                  LIMIT 1';
+        return $this->id;
+    }
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
+    public function getName()
+    {
+        return $this->name;
+    }
 
-        // Execute query
-        $stmt->execute([$this->id]);
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->name = $row['name'];
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }

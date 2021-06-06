@@ -5,7 +5,7 @@ class Role
   private $conn;
   private $table = 'roles';
 
-  // Post Properties
+  // Role Properties
   public $id;
   public $name;
 
