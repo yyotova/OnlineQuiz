@@ -63,7 +63,7 @@ class Quiz
 
     public function getMaxScore()
     {
-        return $this->max_score;
+        return $this->maxScore;
     }
 
     public function setId($id)
