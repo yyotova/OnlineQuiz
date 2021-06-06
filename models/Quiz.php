@@ -41,6 +41,22 @@ class Quiz
         return $this->insertQuizQuery($id, $title, $description, $levelId, $maxScore);
     }
 
+    public function setUserScore($userId, $quizId, $userScore)
+    {
+        $this->connection->beginTransaction();
+
+        $sql = "UPDATE user_info SET user_score = ? WHERE user_id = ? AND quiz_id = ?";
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->bindValue(1, $userScore, PDO::PARAM_INT);
+        $stmt->bindValue(2, $userId, PDO::PARAM_STR);
+        $stmt->bindValue(3, $quizId, PDO::PARAM_STR);
+
+        $stmt->execute([$userScore, $userId, $quizId]);
+
+        $this->connection->commit();
+    }
+
     public function getId()
     {
         return $this->id;
