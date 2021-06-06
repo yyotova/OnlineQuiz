@@ -4,36 +4,33 @@ include_once('Level.php');
 
 class Quiz
 {
-    // DB stuff
     private $connection;
-    private $table = 'quizes';
 
-    // Quiz Properties
     private $id;
     private $title;
     private $description;
     private $levelId;
     private $maxScore;
 
-    // Constructor with DB
     public function __construct($db)
     {
         $this->connection = $db;
     }
 
-    // Get Quizes
-    public function getQuizes()
+    public function getQuizById($id)
     {
-        // Create query
-        $query = 'SELECT name FROM' . $this->table;
+        $sql = 'SELECT * FROM quizes WHERE id = ?';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(1, $id, PDO::PARAM_STR);
+        $stmt->execute([$id]);
 
-        // Prepare statement
-        $stmt = $this->connection->prepare($query);
+        $quiz = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Execute query
-        $stmt->execute();
+        if (empty($quiz)) {
+            throw new InvalidArgumentException('Quiz with id ' . $id . ' does not exist!');
+        }
 
-        return $stmt;
+        return $quiz;
     }
 
     public function createQuiz($id, $title, $description, $levelId, $maxScore)

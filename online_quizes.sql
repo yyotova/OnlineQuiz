@@ -66,7 +66,7 @@ CREATE TABLE `questions` (
   `title` text NOT NULL,
   `points` int(11) NOT NULL,
   `quiz_id` varchar(124) NOT NULL,
-  `picture` varchar(124) NOT NULL
+  `picture` varchar(124)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
