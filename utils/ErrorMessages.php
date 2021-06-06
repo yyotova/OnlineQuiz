@@ -11,4 +11,6 @@ class ErrorMessages
     public const QUESTION_ID_ERROR_MESSAGE = 'Question ID should be provided!';
     public const QUESTION_TITLE_ERROR_MESSAGE = 'Title should be provided!';
     public const QUESTION_POINTS_ERROR_MESSAGE = 'Points should be provided!';
+
+    public const ANSWER_CONTENT_ERROR_MESSAGE = 'Answer content should be provided!';
 }
