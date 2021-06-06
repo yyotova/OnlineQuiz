@@ -31,7 +31,7 @@ class Role
   }
 
   // Get Single Role
-  public function getRoleById()
+  public function getRoleById($id)
   {
     // Create query
     $query = 'SELECT * FROM ' . $this->table . '
@@ -43,10 +43,12 @@ class Role
     $stmt = $this->conn->prepare($query);
 
     // Execute query
-    $stmt->execute([$this->id]);
+    $stmt->execute([$id]);
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $this->name = $row['name'];
+
+    return $row;
   }
 
   public function getRoleId()

@@ -1,4 +1,6 @@
 <?php
+include_once('Role.php');
+
 class User
 {
   private $role;
@@ -16,6 +18,7 @@ class User
   public function __construct($db)
   {
     $this->conn = $db;
+    $this->enabled = true;
   }
 
   public function getName()
@@ -83,28 +86,28 @@ class User
 
   public function createUser($name, $familyName, $passwordHash, $email, $number)
   {
-    $query = $this->insertUserQuery([
-      "name" => $name, 
-      "familyName" => $familyName,
-      "password" => $passwordHash, 
-      "email" => $email,
-      "number" => $number,
-      "role_id" => "430d3096-c51d-11eb-8529-0242ac130003",
-      "enabled" => true]
+    $user_id = uniqid();
+    $query = $this->insertUserQuery(
+      $user_id,
+      $name, 
+      $familyName,
+      $passwordHash, 
+      $email,
+      $number,
+      "84b2b226-c46b-11eb-8529-0242ac130003" ,
+      $this->enabled
     );
 
     if ($query["success"]) {
-      $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
       $userRole = new Role($this->conn);
 
       $this->password = $passwordHash;
       $this->email = $email;
-      $this->userId = $user["id"];
-      $this->name= $user["name"];
-      $this->role = $userRole->getRoleById($user["role_id"])["name"];
-      $this->familyName = $user["family_name"];
-      $this->number = $user["number"];
-      $this->enabled = $user["enabled"];
+      $this->userId = $user_id;
+      $this->name= $name;
+      $this->role = $userRole->getRoleById("84b2b226-c46b-11eb-8529-0242ac130003")["name"];
+      $this->familyName = $familyName;
+      $this->number = $number;
 
       return $query;
     } else {
@@ -126,16 +129,28 @@ class User
     }
   }
 
-  private function insertUserQuery($data)
+  private function insertUserQuery($id, $name, $familyName, $password, $email, $number, $roleId, $enabled)
   {
     try {
-      $sql = "INSERT INTO users(id, name, password, email, family_name, role_id, number, enabled) VALUES (:id, :username, :password, :email, :familyName, :roleId, :number, :enabled)";
-      $stmt = $this->conn->prepare($sql);
-      $stmt->execute($data);
+      $this->conn->beginTransaction();
 
-      return ["success" => true, "data" => $stmt];
+      $sql = "INSERT INTO users(id, name, password, email, family_name, role_id, number, enabled) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      $stmt = $this->conn->prepare($sql);
+
+      $stmt->bindValue(1, $id, PDO::PARAM_STR);
+      $stmt->bindValue(2, $name, PDO::PARAM_STR);
+      $stmt->bindValue(3, $password, PDO::PARAM_STR);
+      $stmt->bindValue(4, $familyName, PDO::PARAM_STR);
+      $stmt->bindValue(5, $email, PDO::PARAM_STR);
+      $stmt->bindValue(6, $roleId, PDO::PARAM_STR);
+      $stmt->bindValue(7, $number, PDO::PARAM_STR);
+      $stmt->bindValue(8, $enabled, PDO::PARAM_BOOL);
+
+      $stmt->execute([$id, $name, $password, $email, $familyName, $roleId, $number, $enabled]);
+      $this->conn->commit();
+      return ["success" => true];
     } catch (PDOException $e) {
-      $this->connection->rollBack();
+      $this->conn->rollBack();
       return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
     }
   }
