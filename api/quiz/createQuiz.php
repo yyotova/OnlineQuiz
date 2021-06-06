@@ -26,8 +26,10 @@ $maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore
 $levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : '';
 
 try {
-    $quiz = $quiz->createQuiz($id, $title, $description, $levelId, $maxScore);
+    validateParams($title, $description, $levelId, $maxScore);
 
+    $quiz = $quiz->createQuiz($id, $title, $description, $levelId, $maxScore);
+    
     $result = CommonFunction::createSuccessObject($quiz);
 } catch (InvalidArgumentException $e) {
     $result = CommonFunction::createErrorObject($e->getMessage());
