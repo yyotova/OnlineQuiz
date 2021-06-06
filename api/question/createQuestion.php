@@ -13,7 +13,6 @@ include_once '../../utils/ErrorMessages.php';
 $database = new DB();
 $db = $database->getConnection();
 
-// Get raw quiz data
 $data = json_decode(file_get_contents('php://input'), true);
 
 $question = new Question($db);

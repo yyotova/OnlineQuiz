@@ -17,6 +17,22 @@ class Question
         $this->connection = $db;
     }
 
+    public function getQuestionById($id)
+    {
+        $sql = 'SELECT * FROM questions WHERE id = ?';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(1, $id, PDO::PARAM_STR);
+        $stmt->execute([$id]);
+
+        $question = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (empty($question)) {
+            throw new InvalidArgumentException('Question with id ' . $id . ' does not exist!');
+        }
+
+        return $question;
+    }
+
     public function createQuestion($id, $title, $points, $quizId, $picture)
     {
         $quiz = new Quiz($this->connection);
@@ -84,9 +100,9 @@ class Question
 
         $stmt->bindValue(1, $id, PDO::PARAM_STR);
         $stmt->bindValue(2, $title, PDO::PARAM_STR);
-        $stmt->bindValue(3, $points, PDO::PARAM_STR);
+        $stmt->bindValue(3, $points, PDO::PARAM_INT);
         $stmt->bindValue(4, $quizId, PDO::PARAM_STR);
-        $stmt->bindValue(5, $picture, PDO::PARAM_INT);
+        $stmt->bindValue(5, $picture, PDO::PARAM_STR);
 
         $stmt->execute([$id, $title, $points, $quizId, $picture]);
 
