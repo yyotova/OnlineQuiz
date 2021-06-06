@@ -66,7 +66,7 @@ class User
           $this->password = $user["password"];
           $this->email = $user["email"];
           $this->userId = $user["id"];
-          $this->name= $user["name"];
+          $this->name = $user["name"];
           $this->role = $userRole->getRoleById($user["role_id"])["name"];
           $this->familyName = $user["family_name"];
           $this->number = $user["number"];
@@ -89,12 +89,12 @@ class User
     $user_id = uniqid();
     $query = $this->insertUserQuery(
       $user_id,
-      $name, 
+      $name,
       $familyName,
-      $passwordHash, 
+      $passwordHash,
       $email,
       $number,
-      "84b2b226-c46b-11eb-8529-0242ac130003" ,
+      "84b2b226-c46b-11eb-8529-0242ac130003",
       $this->enabled
     );
 
@@ -104,7 +104,7 @@ class User
       $this->password = $passwordHash;
       $this->email = $email;
       $this->userId = $user_id;
-      $this->name= $name;
+      $this->name = $name;
       $this->role = $userRole->getRoleById("84b2b226-c46b-11eb-8529-0242ac130003")["name"];
       $this->familyName = $familyName;
       $this->number = $number;
@@ -113,6 +113,22 @@ class User
     } else {
       return $query;
     }
+  }
+
+  public function getUsersQuizes($userId)
+  {
+    $sql = 'SELECT * FROM quizes JOIN user_info ON user_info.quiz_id = quizes.id WHERE user_info.user_id = ?';
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(1, $userId, PDO::PARAM_STR);
+    $stmt->execute([$userId]);
+
+    $quizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($quizes)) {
+      throw new InvalidArgumentException('Quizes for user with id ' . $userId . ' does not exist!');
+    }
+
+    return $quizes;
   }
 
   private function selectUserQuery($data)
