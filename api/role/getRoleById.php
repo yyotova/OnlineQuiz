@@ -14,16 +14,17 @@ $db = $database->getConnection();
 $role = new Role($db);
 
 // Get ID
-$role->id = isset($_GET['id']) ? $_GET['id'] : die();
+$role_id = isset($_GET['id']) ? $_GET['id'] : die();
 
 // Get role
-$role->getRoleById();
+$role->getRoleById($role_id);
 
 // Create array
 $role_arr = array(
-  'id' => $role->id,
-  'name' => $role->name,
+  'id' => $role->getRoleId(),
+  'name' => $role->getRoleName(),
 );
 
 // Make JSON
 print_r(json_encode($role_arr));
+?>
