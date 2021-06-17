@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 04, 2021 at 11:03 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Хост: 127.0.0.1
+-- Време на генериране: 17 юни 2021 в 16:16
+-- Версия на сървъра: 10.4.19-MariaDB
+-- Версия на PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `online_quizes`
+-- База данни: `online_quizes`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
+-- Структура на таблица `answers`
 --
 
 CREATE TABLE `answers` (
@@ -38,7 +38,7 @@ CREATE TABLE `answers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `levels`
+-- Структура на таблица `levels`
 --
 
 CREATE TABLE `levels` (
@@ -47,7 +47,7 @@ CREATE TABLE `levels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `levels`
+-- Схема на данните от таблица `levels`
 --
 
 INSERT INTO `levels` (`id`, `name`) VALUES
@@ -58,7 +58,7 @@ INSERT INTO `levels` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Структура на таблица `questions`
 --
 
 CREATE TABLE `questions` (
@@ -66,13 +66,13 @@ CREATE TABLE `questions` (
   `title` text NOT NULL,
   `points` int(11) NOT NULL,
   `quiz_id` varchar(124) NOT NULL,
-  `picture` varchar(124)
+  `picture` varchar(124) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `quizes`
+-- Структура на таблица `quizes`
 --
 
 CREATE TABLE `quizes` (
@@ -83,10 +83,18 @@ CREATE TABLE `quizes` (
   `max_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Схема на данните от таблица `quizes`
+--
+
+INSERT INTO `quizes` (`id`, `title`, `description`, `level_id`, `max_score`) VALUES
+('67df61fc-c6ba-11eb-b8bc-0242ac130003', 'PHP', 'OOP with PHP', '07f32f0e-c510-11eb-8529-0242ac130003', 100),
+('67df6422-c6ba-11eb-b8bc-0242ac130003', 'SQL', 'Basic Queries', 'd3ca906e-c50f-11eb-8529-0242ac130003', 100);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Структура на таблица `roles`
 --
 
 CREATE TABLE `roles` (
@@ -95,7 +103,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `roles`
+-- Схема на данните от таблица `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
@@ -105,7 +113,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Структура на таблица `users`
 --
 
 CREATE TABLE `users` (
@@ -114,15 +122,35 @@ CREATE TABLE `users` (
   `family_name` varchar(124) NOT NULL,
   `email` varchar(124) NOT NULL,
   `password` varchar(15) NOT NULL,
-  `number` varchar(10) NOT NULL,
+  `number` varchar(124) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   `role_id` varchar(124) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Схема на данните от таблица `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `family_name`, `email`, `password`, `number`, `enabled`, `role_id`) VALUES
+('60bca4a76d933', 'Anni', 'Yotova', 'anni@gmail.com', '$2y$10$PAGOAoV.', '0881234567', 1, '84b2b226-c46b-11eb-8529-0242ac130003'),
+('60bcb2d799462', 'Pufi', 'Staneva', 'staneva@gmail.com', '$2y$10$HiBySOWV', '0881234123', 1, '84b2b226-c46b-11eb-8529-0242ac130003');
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `users_answers`
+--
+
+CREATE TABLE `users_answers` (
+  `id` varchar(124) NOT NULL,
+  `user_id` varchar(124) NOT NULL,
+  `answer_id` varchar(124) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_info`
+-- Структура на таблица `user_info`
 --
 
 CREATE TABLE `user_info` (
@@ -133,51 +161,66 @@ CREATE TABLE `user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Схема на данните от таблица `user_info`
+--
+
+INSERT INTO `user_info` (`id`, `user_id`, `quiz_id`, `user_score`) VALUES
+('67df6512-c6ba-11eb-b8bc-0242ac130003', '60bca4a76d933', '67df61fc-c6ba-11eb-b8bc-0242ac130003', 60);
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `answers`
+-- Индекси за таблица `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `answer_question_fk` (`question_id`);
 
 --
--- Indexes for table `levels`
+-- Индекси за таблица `levels`
 --
 ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `questions`
+-- Индекси за таблица `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `question_quiz_fk` (`quiz_id`);
 
 --
--- Indexes for table `quizes`
+-- Индекси за таблица `quizes`
 --
 ALTER TABLE `quizes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `level_quiz_fk` (`level_id`);
 
 --
--- Indexes for table `roles`
+-- Индекси за таблица `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Индекси за таблица `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_role_fk` (`role_id`);
 
 --
--- Indexes for table `user_info`
+-- Индекси за таблица `users_answers`
+--
+ALTER TABLE `users_answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users` (`user_id`),
+  ADD KEY `answers` (`answer_id`);
+
+--
+-- Индекси за таблица `user_info`
 --
 ALTER TABLE `user_info`
   ADD PRIMARY KEY (`id`),
@@ -185,35 +228,42 @@ ALTER TABLE `user_info`
   ADD KEY `user_info_fk` (`user_id`);
 
 --
--- Constraints for dumped tables
+-- Ограничения за дъмпнати таблици
 --
 
 --
--- Constraints for table `answers`
+-- Ограничения за таблица `answers`
 --
 ALTER TABLE `answers`
   ADD CONSTRAINT `answer_question_fk` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `questions`
+-- Ограничения за таблица `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `question_quiz_fk` FOREIGN KEY (`quiz_id`) REFERENCES `quizes` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `quizes`
+-- Ограничения за таблица `quizes`
 --
 ALTER TABLE `quizes`
   ADD CONSTRAINT `level_quiz_fk` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `users`
+-- Ограничения за таблица `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `user_role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_info`
+-- Ограничения за таблица `users_answers`
+--
+ALTER TABLE `users_answers`
+  ADD CONSTRAINT `answers` FOREIGN KEY (`answer_id`) REFERENCES `answers` (`id`),
+  ADD CONSTRAINT `users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Ограничения за таблица `user_info`
 --
 ALTER TABLE `user_info`
   ADD CONSTRAINT `user_info_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
