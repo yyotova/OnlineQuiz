@@ -24,7 +24,6 @@ try {
 } catch (PDOException $e) {
     $result = CommonFunction::createErrorObject("Connection failed: " . $e->getMessage());
 } finally {
-    print_r($result);
-    return $result;
+    print_r(json_encode($result));
 }
 ?>
