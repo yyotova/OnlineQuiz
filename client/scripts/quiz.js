@@ -2,6 +2,7 @@
   var xhr = new XMLHttpRequest();
   console.log(window.location.search);
   const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id');
   xhr.open("GET", `http://localhost/OnlineQuiz/api/quiz/getQuizById.php?id=${id}`, true);
 
   xhr.onreadystatechange = function () {
