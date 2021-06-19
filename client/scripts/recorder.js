@@ -1,43 +1,28 @@
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
-var gumStream; //stream from getUserMedia()
-var rec; //Recorder.js object
-var input; //MediaStreamAudioSourceNode we'll be recording
+let gumStream; //stream from getUserMedia()
+let rec; //Recorder.js object
+let input; //MediaStreamAudioSourceNode we'll be recording
 
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var audioContext //audio context to help us record
+let AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioContext //audio context to help us record
 
-var recordName;
-var recordBlob;
+let recordName;
+let recordBlob;
 
-var quizInput = document.getElementById("quiz");
-var questionInput = document.getElementById("question");
-
-var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
-var submitButton = document.getElementById("submitButton");
+let recordButton = document.getElementById("recordButton");
+let stopButton = document.getElementById("stopButton");
 
 //add events to those 2 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 
-quizInput.addEventListener("input", inputData);
-questionInput.addEventListener("input", inputData);
-
-function inputData() {
-    if (quizInput.value && questionInput.value) {
-        recordButton.disabled = false;
-    }
-}
-
 function startRecording() {
-    var constraints = { audio: true, video: false }
-
-    //disable the record button until we get a success or fail from getUserMedia()
-
+    let constraints = { audio: true, video: false }
     recordButton.disabled = true;
     stopButton.disabled = false;
+    //disable the record button until we get a success or fail from getUserMedia()
 
     navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
         //getUserMedia() success, stream created, initializing Recorder.js
@@ -67,14 +52,8 @@ function startRecording() {
 }
 
 function stopRecording() {
-    //disable the stop button, enable the record too allow for new recordings
     stopButton.disabled = true;
-    recordButton.disabled = true;
-
-    if (quizInput.value && questionInput.value) {
-        submitButton.disabled = false;
-    }
-
+    recordButton.disabled = false;
     //tell the recorder to stop the recording
     rec.stop();
 
@@ -88,15 +67,15 @@ function stopRecording() {
 function createDownloadLink(blob) {
     recordBlob = blob;
 
-    var url = URL.createObjectURL(blob);
-    var au = document.createElement('audio');
+    let url = URL.createObjectURL(blob);
+    let au = document.createElement('audio');
 
-    var li = document.createElement('li');
+    let li = document.createElement('li');
 
-    var link = document.createElement('a');
+    let link = document.createElement('a');
     link.setAttribute("id", "recordId");
     //name of .wav file to use during upload and download (without extendion)
-    recordName = quizInput.value + '_' + questionInput.value;
+    recordName = 'some_name';
 
     //add controls to the <audio> element
     au.controls = true;
