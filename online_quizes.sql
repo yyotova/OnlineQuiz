@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 17 юни 2021 в 16:16
+-- Време на генериране: 19 юни 2021 в 12:57
 -- Версия на сървъра: 10.4.19-MariaDB
 -- Версия на PHP: 8.0.6
 
@@ -34,6 +34,17 @@ CREATE TABLE `answers` (
   `question_id` varchar(124) NOT NULL,
   `is_text` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Схема на данните от таблица `answers`
+--
+
+INSERT INTO `answers` (`id`, `content`, `is_correct`, `question_id`, `is_text`) VALUES
+('5fd4270e-d0ce-11eb-b8bc-0242ac130003', 'Object-oriented programming', 1, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
+('5fd427fe-d0ce-11eb-b8bc-0242ac130003', 'Programming language', 0, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
+('5fd428c6-d0ce-11eb-b8bc-0242ac130003', 'Method for creating a class', 0, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
+('5fd42b14-d0ce-11eb-b8bc-0242ac130003', 'Design Pattern', 0, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
+('f7981dba-d0cf-11eb-b8bc-0242ac130003', '', 0, '5fd424fc-d0ce-11eb-b8bc-0242ac130003', 1);
 
 -- --------------------------------------------------------
 
@@ -66,8 +77,20 @@ CREATE TABLE `questions` (
   `title` text NOT NULL,
   `points` int(11) NOT NULL,
   `quiz_id` varchar(124) NOT NULL,
-  `picture` varchar(124) NOT NULL
+  `picture` varchar(124) NOT NULL,
+  `is_audio` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Схема на данните от таблица `questions`
+--
+
+INSERT INTO `questions` (`id`, `title`, `points`, `quiz_id`, `picture`, `is_audio`) VALUES
+('5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 'What is OOP?', 3, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('5fd424fc-d0ce-11eb-b8bc-0242ac130003', '4 principels of OOP are:', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('f7981fe0-d0cf-11eb-b8bc-0242ac130003', 'What is SQL?', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('f79820c6-d0cf-11eb-b8bc-0242ac130003', 'Select all movies from the database movies.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('f798218e-d0cf-11eb-b8bc-0242ac130003', 'Select all the actors who play in \"Titanic\".', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0);
 
 -- --------------------------------------------------------
 
@@ -165,7 +188,8 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`id`, `user_id`, `quiz_id`, `user_score`) VALUES
-('67df6512-c6ba-11eb-b8bc-0242ac130003', '60bca4a76d933', '67df61fc-c6ba-11eb-b8bc-0242ac130003', 60);
+('67df6512-c6ba-11eb-b8bc-0242ac130003', '60bca4a76d933', '67df61fc-c6ba-11eb-b8bc-0242ac130003', 60),
+('abb2f054-d062-11eb-b8bc-0242ac130003', '60bca4a76d933', '67df6422-c6ba-11eb-b8bc-0242ac130003', 0);
 
 --
 -- Indexes for dumped tables
