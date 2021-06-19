@@ -72,28 +72,12 @@ function createDownloadLink(blob) {
 
     let li = document.createElement('li');
 
-    let link = document.createElement('a');
-    link.setAttribute("id", "recordId");
-    //name of .wav file to use during upload and download (without extendion)
-    recordName = 'some_name';
-
     //add controls to the <audio> element
     au.controls = true;
     au.src = url;
 
-    //save to disk link
-    link.href = url;
-    link.download = recordName + ".wav"; //download forces the browser to donwload the file using the  filename
-    link.innerHTML = "Save to disk";
-
     //add the new audio element to li
     li.appendChild(au);
-
-    //add the filename to the li
-    li.appendChild(document.createTextNode(recordName + ".wav "))
-
-    //add the save to disk link to li
-    li.appendChild(link);
 
     //add the li element to the ol
     recordingsList.appendChild(li);
