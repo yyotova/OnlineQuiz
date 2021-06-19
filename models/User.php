@@ -102,7 +102,9 @@ class User
 
   public function getUsersQuizes($userId)
   {
-    $sql = 'SELECT * FROM quizes JOIN user_info ON user_info.quiz_id = quizes.id WHERE user_info.user_id = ?';
+    $sql = 'SELECT * FROM quizes 
+    JOIN user_info ON user_info.quiz_id = quizes.id 
+    WHERE user_info.user_id = ?';
     $stmt = $this->conn->prepare($sql);
     $stmt->bindValue(1, $userId, PDO::PARAM_STR);
     $stmt->execute([$userId]);

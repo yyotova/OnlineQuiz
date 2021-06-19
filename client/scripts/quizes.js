@@ -8,7 +8,7 @@
 
       quizes.data.map(quiz => {
         console.log(quiz);
-        console.log(quiz.id);
+        console.log(quiz.quiz_id);
 
         let info = '';
         info += `

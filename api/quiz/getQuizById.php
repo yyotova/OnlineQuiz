@@ -19,9 +19,9 @@ try {
 
     CommonFunction::throwIfDataIsEmpty($id, ErrorMessages::QUIZ_ID_ERROR_MESSAGE);
 
-    $quiz = $quiz->getQuizById($id);
+    $quiz_info = $quiz->getQuizById($id);
 
-    $result = CommonFunction::createSuccessObject($quiz);
+    $result = CommonFunction::createSuccessObject($quiz_info);
 } catch (InvalidArgumentException $e) {
     $result = CommonFunction::createErrorObject($e->getMessage());
 } catch (PDOException $e) {
