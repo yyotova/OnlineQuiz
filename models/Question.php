@@ -11,6 +11,7 @@ class Question
     private $points;
     private $quizId;
     private $picture;
+    private $record;
 
     public function __construct($db)
     {
@@ -41,6 +42,28 @@ class Question
         return $this->insertQuestionQuery($id, $title, $points, $quizId, $picture);
     }
 
+    public function addRecord($blob) {
+        $question = $this->getQuestionById('60bcb8efea59c');
+        echo 'hereeee';
+        $this->connection->beginTransaction();
+
+        $sql = "UPDATE questions SET record = ? WHERE id='60bcb8efea59c'";
+        $stmt = $this->connection->prepare($sql);
+
+        
+        $stmt->bindValue(1, $blob);
+
+        $stmt->execute([$blob]);
+
+        $this->connection->commit();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $row['recordFile'] = $blob;
+
+        return $row;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -66,6 +89,11 @@ class Question
         return $this->picture;
     }
 
+    public function getRecord()
+    {
+        return $this->record;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -89,6 +117,11 @@ class Question
     public function setPicture($picture)
     {
         $this->picture = $picture;
+    }
+
+    public function setRecord($record)
+    {
+        $this->record = $record;
     }
 
     private function insertQuestionQuery($id, $title, $points, $quizId, $picture)

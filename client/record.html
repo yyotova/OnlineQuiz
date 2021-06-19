@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recording</title>
+
+    <link rel="stylesheet" type="text/css" href="../../styles/record-styles.css">
+</head>
+
+<body>
+    <h1>Recording</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label for="quiz">Quiz:</label>
+        <input type="text" id="quiz" name="quiz"><br><br>
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question"><br><br>
+
+        <div id="controls">
+            <button id="recordButton" disabled>Record</button>
+            <button id="stopButton" disabled>Stop</button>
+        </div>
+
+        <ol id="recordingsList"></ol>
+
+        <button id="submitButton" disabled name="submitRecordBtn">Submit</button>
+    </form>
+
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="./scripts/submitRecord.js"></script>
+    <script src="./scripts/recorder.js"></script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/DB.php';
-include_once '../../models/Quiz.php';
+include_once '../../models/Question.php';
 include_once '../../utils/CommonFunction.php';
 include_once '../../utils/ErrorMessages.php';
 
@@ -11,17 +11,17 @@ include_once '../../utils/ErrorMessages.php';
 $database = new DB();
 $db = $database->getConnection();
 
-$quiz = new Quiz($db);
+$data = json_decode(file_get_contents('php://input'), true);
+$fileBlob = $data['recordFile'];
+
+$question = new Question($db);
+
 $result;
 
 try {
-    $id = $_GET['id'];
+    $question = $question->addRecord($fileBlob);
 
-    CommonFunction::throwIfDataIsEmpty($id, ErrorMessages::QUIZ_ID_ERROR_MESSAGE);
-
-    $quiz_info = $quiz->getQuizById($id);
-
-    $result = CommonFunction::createSuccessObject($quiz_info);
+    $result = CommonFunction::createSuccessObject($question);
 } catch (InvalidArgumentException $e) {
     $result = CommonFunction::createErrorObject($e->getMessage());
 } catch (PDOException $e) {
