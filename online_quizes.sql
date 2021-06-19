@@ -132,6 +132,10 @@ CREATE TABLE `user_info` (
   `user_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+ALTER TABLE `questions`
+  ADD record blob;
+
 --
 -- Indexes for dumped tables
 --

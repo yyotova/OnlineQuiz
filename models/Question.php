@@ -11,6 +11,7 @@ class Question
     private $points;
     private $quizId;
     private $picture;
+    private $record;
 
     public function __construct($db)
     {
@@ -66,6 +67,11 @@ class Question
         return $this->picture;
     }
 
+    public function getRecord()
+    {
+        return $this->record;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -89,6 +95,11 @@ class Question
     public function setPicture($picture)
     {
         $this->picture = $picture;
+    }
+
+    public function setRecord($record)
+    {
+        $this->record = $record;
     }
 
     private function insertQuestionQuery($id, $title, $points, $quizId, $picture)

@@ -1,0 +1,14 @@
+audio {
+    display: block;
+    width: 100%;
+    margin-top: 0.2rem;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+#recordingsList {
+    max-width: 28em;
+}
