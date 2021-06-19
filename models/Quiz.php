@@ -19,12 +19,16 @@ class Quiz
 
     public function getQuizById($id)
     {
-        $sql = 'SELECT * FROM quizes WHERE id = ?';
+        $sql = 'SELECT q.title as quiz_title, q.description, qs.title, qs.points, an.content, an.is_text
+         FROM quizes as q 
+         JOIN questions as qs ON q.id = qs.quiz_id 
+         JOIN answers as an ON qs.id = an.question_id 
+         WHERE q.id = ?';
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue(1, $id, PDO::PARAM_STR);
         $stmt->execute([$id]);
 
-        $quiz = $stmt->fetch(PDO::FETCH_ASSOC);
+        $quiz = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if (empty($quiz)) {
             throw new InvalidArgumentException('Quiz with id ' . $id . ' does not exist!');
