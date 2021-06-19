@@ -21,7 +21,6 @@ var submitButton = document.getElementById("submitButton");
 //add events to those 2 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
-submitButton.addEventListener("click", submitRecord);
 
 quizInput.addEventListener("input", inputData);
 questionInput.addEventListener("input", inputData);
@@ -30,16 +29,6 @@ function inputData() {
     if (quizInput.value && questionInput.value) {
         recordButton.disabled = false;
     }
-}
-
-function submitRecord(event) {
-    event.preventDefault();
-
-    var xhr = new XMLHttpRequest();
-    var fd = new FormData();
-    fd.append("audio_data", recordBlob, recordName);
-    xhr.open("POST", "./upload.php", true);
-    xhr.send(fd);
 }
 
 function startRecording() {
@@ -101,8 +90,11 @@ function createDownloadLink(blob) {
 
     var url = URL.createObjectURL(blob);
     var au = document.createElement('audio');
+
     var li = document.createElement('li');
+
     var link = document.createElement('a');
+    link.setAttribute("id", "recordId");
     //name of .wav file to use during upload and download (without extendion)
     recordName = quizInput.value + '_' + questionInput.value;
 
@@ -114,6 +106,11 @@ function createDownloadLink(blob) {
     link.href = url;
     link.download = recordName + ".wav"; //download forces the browser to donwload the file using the  filename
     link.innerHTML = "Save to disk";
+
+    $('a#recordId').attr({
+        target: '_blank',
+        href: 'http://localhost:8080/directory/file.pdf'
+    });
 
     //add the new audio element to li
     li.appendChild(au);

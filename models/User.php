@@ -21,21 +21,6 @@ class User
     $this->enabled = true;
   }
 
-  public function getName()
-  {
-    return $this->name;
-  }
-
-  public function getEmail()
-  {
-    return $this->email;
-  }
-
-  public function getUserId()
-  {
-    return $this->userId;
-  }
-
   public function userExists()
   {
     $query = $this->selectUserQuery(["user" => $this->name]);
@@ -143,6 +128,21 @@ class User
     } catch (PDOException $e) {
       return ["success" => false, "error" => $e->getMessage()];
     }
+  }
+
+  public function getName()
+  {
+    return $this->name;
+  }
+
+  public function getEmail()
+  {
+    return $this->email;
+  }
+
+  public function getUserId()
+  {
+    return $this->userId;
   }
 
   private function insertUserQuery($id, $name, $familyName, $password, $email, $number, $roleId, $enabled)
