@@ -133,7 +133,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `family_name`, `email`, `password`, `number`, `enabled`, `role_id`) VALUES
 ('60bca4a76d933', 'Anni', 'Yotova', 'anni@gmail.com', '$2y$10$PAGOAoV.', '0881234567', 1, '84b2b226-c46b-11eb-8529-0242ac130003'),
-('60bcb2d799462', 'Pufi', 'Staneva', 'staneva@gmail.com', '$2y$10$HiBySOWV', '0881234123', 1, '84b2b226-c46b-11eb-8529-0242ac130003');
+('60bcb2d799462', 'Pavleta', 'Staneva', 'staneva@gmail.com', '$2y$10$HiBySOWV', '0881234123', 1, '84b2b226-c46b-11eb-8529-0242ac130003');
 
 -- --------------------------------------------------------
 

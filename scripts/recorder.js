@@ -107,11 +107,6 @@ function createDownloadLink(blob) {
     link.download = recordName + ".wav"; //download forces the browser to donwload the file using the  filename
     link.innerHTML = "Save to disk";
 
-    $('a#recordId').attr({
-        target: '_blank',
-        href: 'http://localhost:8080/directory/file.pdf'
-    });
-
     //add the new audio element to li
     li.appendChild(au);
 
