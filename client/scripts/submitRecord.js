@@ -5,7 +5,7 @@ var recordFile = document.getElementById("recordId");
 
 function submitRecord() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/OnlineQuiz/api/record/record.php", true);
+    xhr.open("POST", "http://localhost/OnlineQuiz/api/record/record.php", true);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
