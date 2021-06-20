@@ -1,0 +1,171 @@
+:root {
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-family: Arial !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffe0;
+}
+
+ol,
+div + div {
+  margin-top: 1.5rem;
+}
+
+ol > div > li,
+ol > div > li > audio {
+  margin-bottom: 1rem;
+}
+
+ol > div > audio {
+  margin-bottom: 0.5rem;
+}
+
+img {
+  width: 8rem;
+  height: 8rem;
+  padding: 1rem 0 0 1rem;
+}
+
+header {
+  margin-bottom: 5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.quiz-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 5rem;
+  font-size: 2rem;
+}
+
+.quiz-container,
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz-container,
+a + a {
+  margin-top: 3rem;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+audio {
+  max-height: 2.5rem;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.select {
+  width: 100%;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+}
+
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: var(--select-arrow);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+}
+
+select,
+.select:after {
+  grid-area: select;
+}
+
+textarea {
+  width: 100%;
+  min-height: 5rem;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25rem;
+}
+
+button {
+  color: #0099cc;
+  background-color: transparent;
+  border: 2px solid #0099cc;
+  border-radius: 5px;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.button-container {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#stopButton {
+  border-color: red;
+  color: red;
+}
+
+.record-form > section + section {
+  margin-top: 1rem;
+}
+
+#controls {
+  margin-top: 2rem;
+}

@@ -1,26 +1,23 @@
 (() => {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/OnlineQuiz/api/quiz/getUserQuizes.php?id=60bca4a76d933", true);
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      var quizes = JSON.parse(xhr.responseText);
+      let quizes = JSON.parse(xhr.responseText);
 
       quizes.data.map(quiz => {
-        console.log(quiz);
-        console.log(quiz.quiz_id);
-
-        let info = '';
-        info += `
-          <div>
-          <a href="quiz.html?id=${quiz.quiz_id}">${quiz.title}</a>
-          </div>
-        `;
         mainContent = document.getElementById("main-content");
-        mainContent.innerHTML += info;
+        let div = document.createElement("div");
+        div.className = "quiz-container";
+        
+        let a = document.createElement("a");
+        a.href = `quiz.html?id=${quiz.quiz_id}`;
+        a.innerText = quiz.title;
 
+        div.appendChild(a);
+        mainContent.appendChild(div);
       })
-
     }
   }
   xhr.send();

@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/main.css" />
     <title>Online Quizes</title>
-</head>
+  </head>
 
-<body>
-    <form type="submit" method="POST" id="quiz-form">
+  <body>
+    <a href="./homepage.html">
+      <img src="../images/su.png" />
+    </a>
+
+    <section class="quiz-form-container" id="quiz-section">
+      <h3 class="title">Header</h3>
+      <form type="submit" method="POST" id="quiz-form">
         <section id="questions"></section>
-        <button type="submit">Submit</button>
-    </form>
-    <script src="./scripts/quiz.js"></script>
-</body>
+        <div class="button-container">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
 
+    <script src="./scripts/quiz.js"></script>
+    <script src="./scripts/getImage.js"></script>
+  </body>
 </html>

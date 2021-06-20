@@ -70,15 +70,10 @@ function createDownloadLink(blob) {
     let url = URL.createObjectURL(blob);
     let au = document.createElement('audio');
 
-    let li = document.createElement('li');
-
     //add controls to the <audio> element
     au.controls = true;
     au.src = url;
 
-    //add the new audio element to li
-    li.appendChild(au);
-
     //add the li element to the ol
-    recordingsList.appendChild(li);
+    recordingsList.appendChild(au);
 }
