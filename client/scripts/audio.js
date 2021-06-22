@@ -2,7 +2,7 @@
   var xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    "http://localhost:8080/OnlineQuiz/api/quiz/getUserQuizes.php?id=60bca4a76d933",
+    "http://localhost/OnlineQuiz/api/quiz/getUserQuizes.php?id=60bca4a76d933",
     true
   );
 
