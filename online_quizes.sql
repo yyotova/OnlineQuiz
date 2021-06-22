@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 19 юни 2021 в 12:57
+-- Време на генериране: 22 юни 2021 в 10:26
 -- Версия на сървъра: 10.4.19-MariaDB
 -- Версия на PHP: 8.0.6
 
@@ -40,10 +40,29 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `content`, `is_correct`, `question_id`, `is_text`) VALUES
+('2f7187ae-d2c8-11eb-b8bc-0242ac130003', 'Encapsulation', 0, '86129582-d2c6-11eb-b8bc-0242ac130003', 0),
+('2f7189fc-d2c8-11eb-b8bc-0242ac130003', 'Inheritance', 1, '86129582-d2c6-11eb-b8bc-0242ac130003', 0),
+('2f718af6-d2c8-11eb-b8bc-0242ac130003', 'Polymorphism', 0, '86129582-d2c6-11eb-b8bc-0242ac130003', 0),
 ('5fd4270e-d0ce-11eb-b8bc-0242ac130003', 'Object-oriented programming', 1, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
 ('5fd427fe-d0ce-11eb-b8bc-0242ac130003', 'Programming language', 0, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
 ('5fd428c6-d0ce-11eb-b8bc-0242ac130003', 'Method for creating a class', 0, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
 ('5fd42b14-d0ce-11eb-b8bc-0242ac130003', 'Design Pattern', 0, '5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 0),
+('861292f8-d2c6-11eb-b8bc-0242ac130003', '', 0, 'b3c2e6f6-d2c3-11eb-b8bc-0242ac130003', 1),
+('ad4abc26-d2c4-11eb-b8bc-0242ac130003', '', 0, 'b3c2e980-d2c3-11eb-b8bc-0242ac130003', 1),
+('ad4abea6-d2c4-11eb-b8bc-0242ac130003', '', 0, 'b3c2e980-d2c3-11eb-b8bc-0242ac130003', 1),
+('ad4abfa0-d2c4-11eb-b8bc-0242ac130003', '', 0, 'b3c2ea66-d2c3-11eb-b8bc-0242ac130003', 1),
+('ad4ac072-d2c4-11eb-b8bc-0242ac130003', '', 0, 'b3c2e980-d2c3-11eb-b8bc-0242ac130003', 1),
+('bec8b2d2-d0f3-11eb-b8bc-0242ac130003', '', 0, '0029e7e2-d0ee-11eb-b8bc-0242ac130003', 1),
+('bec8b566-d0f3-11eb-b8bc-0242ac130003', '', 0, 'd20981f0-d0ee-11eb-b8bc-0242ac130003', 1),
+('d20984a2-d0ee-11eb-b8bc-0242ac130003', '', 0, 'f7981fe0-d0cf-11eb-b8bc-0242ac130003', 1),
+('d2098592-d0ee-11eb-b8bc-0242ac130003', '', 0, 'f79820c6-d0cf-11eb-b8bc-0242ac130003', 1),
+('d209866e-d0ee-11eb-b8bc-0242ac130003', '', 0, 'f798218e-d0cf-11eb-b8bc-0242ac130003', 1),
+('d209874a-d0ee-11eb-b8bc-0242ac130003\r\n\r\n', '', 0, 'f7982242-d0cf-11eb-b8bc-0242ac130003', 1),
+('dd64e446-d0f2-11eb-b8bc-0242ac130003', '', 0, '0029e3fa-d0ee-11eb-b8bc-0242ac130003', 1),
+('dd64e6d0-d0f2-11eb-b8bc-0242ac130003', '', 0, '0029e616-d0ee-11eb-b8bc-0242ac130003', 1),
+('dd64e7c0-d0f2-11eb-b8bc-0242ac130003', '', 0, '0029e616-d0ee-11eb-b8bc-0242ac130003', 1),
+('dd64e888-d0f2-11eb-b8bc-0242ac130003', '', 0, '0029e710-d0ee-11eb-b8bc-0242ac130003', 1),
+('dd64ea04-d0f2-11eb-b8bc-0242ac130003', '', 0, '0029ea76-d0ee-11eb-b8bc-0242ac130003', 1),
 ('f7981dba-d0cf-11eb-b8bc-0242ac130003', '', 0, '5fd424fc-d0ce-11eb-b8bc-0242ac130003', 1);
 
 -- --------------------------------------------------------
@@ -86,11 +105,22 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `title`, `points`, `quiz_id`, `picture`, `is_audio`) VALUES
-('5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 'What is OOP?', 3, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('0029e3fa-d0ee-11eb-b8bc-0242ac130003', 'Select all records from customers where the City column has the value \'Berlin\' and the PostalCode column has the value 12209.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('0029e616-d0ee-11eb-b8bc-0242ac130003', 'Update the City column of all records in the Customers table.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('0029e710-d0ee-11eb-b8bc-0242ac130003', 'Use the MIN function to select the record with the smallest value of the Price column.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('0029e7e2-d0ee-11eb-b8bc-0242ac130003', 'Use the correct function to return the number of records from Products that have the Price value set to 18.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('0029ea76-d0ee-11eb-b8bc-0242ac130003', 'List the number of customers in each country.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 'What is OOP?', 3, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 1),
 ('5fd424fc-d0ce-11eb-b8bc-0242ac130003', '4 principels of OOP are:', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('86129582-d2c6-11eb-b8bc-0242ac130003', 'The process by which one object can acquire the properties of another object:', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('b3c2e6f6-d2c3-11eb-b8bc-0242ac130003', 'What is a class?', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('b3c2e980-d2c3-11eb-b8bc-0242ac130003', 'What is an object?', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('b3c2ea66-d2c3-11eb-b8bc-0242ac130003', 'What is the difference between a class and an object?', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('d20981f0-d0ee-11eb-b8bc-0242ac130003', 'Select all records from the Customers table, sort the result alphabetically by the column City.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('f7981fe0-d0cf-11eb-b8bc-0242ac130003', 'What is SQL?', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('f79820c6-d0cf-11eb-b8bc-0242ac130003', 'Select all movies from the database movies.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
-('f798218e-d0cf-11eb-b8bc-0242ac130003', 'Select all the actors who play in \"Titanic\".', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0);
+('f798218e-d0cf-11eb-b8bc-0242ac130003', 'Select all the actors who play in \"Titanic\".', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
+('f7982242-d0cf-11eb-b8bc-0242ac130003', 'Select all records where the City column has the value \"Berlin\".', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0);
 
 -- --------------------------------------------------------
 
@@ -156,7 +186,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `family_name`, `email`, `password`, `number`, `enabled`, `role_id`) VALUES
 ('60bca4a76d933', 'Anni', 'Yotova', 'anni@gmail.com', '$2y$10$PAGOAoV.', '0881234567', 1, '84b2b226-c46b-11eb-8529-0242ac130003'),
-('60bcb2d799462', 'Pavleta', 'Staneva', 'staneva@gmail.com', '$2y$10$HiBySOWV', '0881234123', 1, '84b2b226-c46b-11eb-8529-0242ac130003');
+('60bcb2d799462', 'Pufi', 'Staneva', 'staneva@gmail.com', '$2y$10$HiBySOWV', '0881234123', 1, '84b2b226-c46b-11eb-8529-0242ac130003');
 
 -- --------------------------------------------------------
 
@@ -182,10 +212,6 @@ CREATE TABLE `user_info` (
   `quiz_id` varchar(124) NOT NULL,
   `user_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-ALTER TABLE `questions`
-  ADD record blob;
 
 --
 -- Схема на данните от таблица `user_info`
