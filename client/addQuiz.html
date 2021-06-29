@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../client/styles/main.css" />
+  <link rel="stylesheet" href="../client/styles/main.css" />
+  <title>Online Quizes</title>
+</head>
+
+<body>
+  <section class="quiz-form-container">
+    <h3 class="title">Create new Quiz</h3>
+    <form class="add-quiz-form" id="new-quiz" type="submit" method="POST">
+      <label for="title">Title: </label>
+      <input id="title" name="title" type="text">
+      <label for="description">Description: </label>
+      <textarea id="description" name="description" type="text"> </textarea>
+      <label for="maxScore">Max Score: </label>
+      <input id="maxScore" name="maxScore" type="text">
+      <label for="levelId">Level: </label>
+      <input id="levelId" name="levelId" type="text">
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <script src="./scripts/addQuiz.js"></script>
+</body>
+
+</html>

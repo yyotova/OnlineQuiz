@@ -20,10 +20,10 @@ $quiz = new Quiz($db);
 $result;
 
 $id = uniqid();
-$title = isset($data['title']) ? CommonFunction::testInput($data['title']) : '';
-$description = isset($data['description']) ? CommonFunction::testInput($data['description']) : '';
-$maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore']) : '';
-$levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : '';
+$title = $_POST['title'] ? CommonFunction::testInput($_POST['title']) : '';
+$description = $_POST['description'] ? CommonFunction::testInput($_POST['description']) : '';
+$maxScore = $_POST['maxScore'] ? CommonFunction::testInput($_POST['maxScore']) : '';
+$levelId = $_POST['levelId'] ? CommonFunction::testInput($_POST['levelId']) : '';
 
 try {
     validateParams($title, $description, $levelId, $maxScore);
@@ -36,14 +36,14 @@ try {
 } catch (PDOException $e) {
     $result = CommonFunction::createErrorObject("Connection failed: " . $e->getMessage());
 } finally {
-    print_r($result);
-    return $result;
+    // print_r($result);
+    // return $result; 
 }
 
 function validateParams($title, $description, $levelId, $maxScore)
 {
     CommonFunction::throwIfDataIsEmpty($title, ErrorMessages::QUIZ_TITLE_ERROR_MESSAGE);
     CommonFunction::throwIfDataIsEmpty($description, ErrorMessages::QUIZ_DESCRIPTION_ERROR_MESSAGE);
-    CommonFunction::throwIfDataIsEmpty($levelId, ErrorMessages::LEVEL_ID_ERROR_MESSAGE);
+    // CommonFunction::throwIfDataIsEmpty($levelId, ErrorMessages::LEVEL_ID_ERROR_MESSAGE);
     CommonFunction::throwIfDataIsEmpty($maxScore, ErrorMessages::QUIZ_MAXSCORE_ERROR_MESSAGE);
 }
