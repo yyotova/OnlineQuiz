@@ -1,11 +1,11 @@
 (() => {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://localhost:8080/OnlineQuiz/api/quiz/getUserQuizes.php?id=60bca4a76d933", true);
+  xhr.open("GET", "http://localhost/OnlineQuiz/api/quiz/getAllQuizes.php", true);
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
       let quizes = JSON.parse(xhr.responseText);
-
+ 
       quizes.data.map(quiz => {
         mainContent = document.getElementById("main-content");
         let div = document.createElement("div");

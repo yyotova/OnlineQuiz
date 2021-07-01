@@ -27,7 +27,7 @@ $quizId = isset($data['quizId']) ? CommonFunction::testInput($data['quizId']) : 
 try {
     validateParams($title, $points, $quizId);
 
-    $question = $question->createQuestion($id, $title, $points, $quizId, $picture);
+    $question = $question->createQuestion($id, $title, $points, $quizId, $picture, $isText);
 
     $result = CommonFunction::createSuccessObject($question);
 } catch (InvalidArgumentException $e) {
