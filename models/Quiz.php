@@ -37,6 +37,21 @@ class Quiz
         return $quiz;
     }
 
+    public function getAllQuizes()
+    {
+      $sql = 'SELECT * FROM quizes';
+      $stmt = $this->connection->prepare($sql);
+      $stmt->execute();
+  
+      $quizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+      if (empty($quizes)) {
+        throw new InvalidArgumentException('No quizes!');
+      }
+  
+      return $quizes;
+    }
+
     public function createQuiz($id, $title, $description, $levelId, $maxScore)
     {
         // $quizLevel = new Level($this->connection);
