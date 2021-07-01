@@ -19,7 +19,7 @@ class Quiz
 
     public function getQuizById($id)
     {
-        $sql = 'SELECT q.title as quiz_title, q.description, qs.title, qs.points, qs.is_audio, an.is_text, an.content, an.is_text
+        $sql = 'SELECT qs.id as question_id, q.title as quiz_title, q.description, qs.title, qs.points, qs.is_audio, an.is_text, an.content, an.is_text
          FROM quizes as q 
          JOIN questions as qs ON q.id = qs.quiz_id 
          JOIN answers as an ON qs.id = an.question_id 

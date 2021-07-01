@@ -34,6 +34,34 @@ class Question
         return $question;
     }
 
+    public function getQuestionsByQuizId($quizId)
+  {
+    $sql = 'SELECT * FROM questions 
+    WHERE quiz_id = ?';
+    $stmt = $this->connection->prepare($sql);
+    $stmt->bindValue(1, $quizId, PDO::PARAM_STR);
+    $stmt->execute([$quizId]);
+
+    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($questions)) {
+      throw new InvalidArgumentException('Questions for quiz with id ' . $quizId . ' does not exist!');
+    }
+
+    return $questions;
+  }
+
+  public function getQuestions()
+  {
+    $sql = 'SELECT * FROM questions';
+    $stmt = $this->connection->prepare($sql);
+    $stmt->execute();
+
+    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $questions;
+  }
+
     public function createQuestion($id, $title, $points, $quizId, $picture)
     {
         $quiz = new Quiz($this->connection);
@@ -42,26 +70,12 @@ class Question
         return $this->insertQuestionQuery($id, $title, $points, $quizId, $picture);
     }
 
-    public function addRecord($blob) {
-        $question = $this->getQuestionById('60bcb8efea59c');
-        echo 'hereeee';
-        $this->connection->beginTransaction();
-
-        $sql = "UPDATE questions SET record = ? WHERE id='60bcb8efea59c'";
+    public function setAudioType($questionId) {
+        echo 'hreee';
+        $sql = 'UPDATE questions SET is_audio = 1 WHERE id = ?';
         $stmt = $this->connection->prepare($sql);
-
-        
-        $stmt->bindValue(1, $blob);
-
-        $stmt->execute([$blob]);
-
-        $this->connection->commit();
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $row['recordFile'] = $blob;
-
-        return $row;
+        $stmt->bindValue(1, $questionId, PDO::PARAM_STR);
+        $stmt->execute([$questionId]);
     }
 
     public function getId()
