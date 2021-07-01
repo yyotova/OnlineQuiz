@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 22 юни 2021 в 10:26
+-- Време на генериране:  1 юли 2021 в 23:34
 -- Версия на сървъра: 10.4.19-MariaDB
 -- Версия на PHP: 8.0.6
 
@@ -110,7 +110,7 @@ INSERT INTO `questions` (`id`, `title`, `points`, `quiz_id`, `picture`, `is_audi
 ('0029e710-d0ee-11eb-b8bc-0242ac130003', 'Use the MIN function to select the record with the smallest value of the Price column.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('0029e7e2-d0ee-11eb-b8bc-0242ac130003', 'Use the correct function to return the number of records from Products that have the Price value set to 18.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('0029ea76-d0ee-11eb-b8bc-0242ac130003', 'List the number of customers in each country.', 10, '67df6422-c6ba-11eb-b8bc-0242ac130003', '', 0),
-('5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 'What is OOP?', 3, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 1),
+('5c59ae0a-d0ce-11eb-b8bc-0242ac130003', 'What is OOP?', 3, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('5fd424fc-d0ce-11eb-b8bc-0242ac130003', '4 principels of OOP are:', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('86129582-d2c6-11eb-b8bc-0242ac130003', 'The process by which one object can acquire the properties of another object:', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
 ('b3c2e6f6-d2c3-11eb-b8bc-0242ac130003', 'What is a class?', 10, '67df61fc-c6ba-11eb-b8bc-0242ac130003', '', 0),
