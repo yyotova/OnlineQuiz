@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../client/styles/main.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
     <title>Recording</title>
   </head>
 
@@ -12,10 +12,19 @@
       <img src="../images/su.png" />
     </a>
 
+    <div id="quide">
+      <h5>Guidelines</h5>
+      <ul>
+        <li>select a quiz and a question</li>
+        <li>upload a record of the question if you already have</li>
+        <li>record the question if you do not have one and upload it</li>
+      </ul>
+    </div>
+
     <section class="quiz-form-container" id="quiz-section">
       <h1 class="title">Recording</h1>
 
-      <form class="record-form" method="post" enctype="multipart/form-data">
+      <form id="myForm" class="record-form" method="post" enctype="multipart/form-data">
         <section id="quiz">
           <span>Quiz:</span>
         </section>
@@ -23,25 +32,24 @@
           <span>Question:</span>
         </section>
 
+        <div id="upload">
+          <input type="file" id="inpFile" /><br />
+          <div class="button-container">
+            <button type="submit">Upload</button>
+          </div>
+        </div>
+
         <div id="controls">
           <button id="recordButton">Record</button>
           <button id="stopButton">Stop</button>
         </div>
 
         <div id="recordingsList"></div>
-
-        <div class="button-container">
-          <button id="submitButton" type="submit" name="submitRecordBtn">
-            Submit
-          </button>
-        </div>
       </form>
     </section>
 
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-    <script src="./scripts/submitRecord.js"></script>
     <script src="./scripts/recorder.js"></script>
-    <script src="./scripts/audio.js"></script>
-    <script src="./scripts/getImage.js"></script>
+    <script src="./scripts/retrieve-quizes.js"></script>
   </body>
 </html>

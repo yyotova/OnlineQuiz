@@ -177,3 +177,12 @@ button {
 #controls {
   margin-top: 2rem;
 }
+
+#quide {
+  padding-top: 2rem;
+  padding-left: 2rem;
+}
+
+#upload {
+  padding-top: 1.5rem;
+}
