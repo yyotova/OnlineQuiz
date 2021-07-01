@@ -1,3 +1,6 @@
+CREATE SCHEMA `online_quizes` ;
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
@@ -197,7 +200,8 @@ INSERT INTO `users` (`id`, `name`, `family_name`, `email`, `password`, `number`,
 CREATE TABLE `users_answers` (
   `id` varchar(124) NOT NULL,
   `user_id` varchar(124) NOT NULL,
-  `answer_id` varchar(124) NOT NULL
+  `answer_id` varchar(124) NOT NULL,
+  `content` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

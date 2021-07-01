@@ -30,6 +30,27 @@ class Answer
         return $this->insertAnswerQuery($id, $content, $questionId, $isCorrect, $isText);
     }
 
+    public function setAnswer($answerId, $userId, $answerContent)
+    {
+        $id = uniqid();
+
+        $this->connection->beginTransaction();
+
+        print_r($answerContent);
+
+        $sql = 'INSERT INTO users_answers(id, user_id, answer_id, content) VALUES (?, ?, ?, ?)';
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->bindValue(1, $id, PDO::PARAM_STR);
+        $stmt->bindValue(2, $userId, PDO::PARAM_STR);
+        $stmt->bindValue(3, $answerId, PDO::PARAM_STR);
+        $stmt->bindValue(4, $answerContent, PDO::PARAM_STR);
+
+        $stmt->execute([$id, $userId, $answerId, $answerContent]);
+
+        $this->connection->commit();
+    }
+
     public function getId()
     {
         return $this->id;

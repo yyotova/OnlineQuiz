@@ -2,7 +2,7 @@
   var questionRequest = new XMLHttpRequest();
   questionRequest.open(
     "GET",
-    "http://localhost/OnlineQuiz/api/question/getQuestions.php",
+    "http://localhost:8080/OnlineQuiz/api/question/getQuestions.php",
     true
   );
 
@@ -32,7 +32,7 @@
   var xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    "http://localhost/OnlineQuiz/api/quiz/getUserQuizes.php?id=60bca4a76d933",
+    "http://localhost:8080/OnlineQuiz/api/quiz/getUserQuizes.php?id=60bca4a76d933",
     true
   );
 
@@ -114,7 +114,7 @@
       }
     }
 
-    const endpoint = "http://localhost/OnlineQuiz/api/upload/upload.php";
+    const endpoint = "http://localhost:8080/OnlineQuiz/api/upload/upload.php";
     const formData = new FormData();
 
     formData.append("inpFile", inpFile.files[0]);
