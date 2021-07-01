@@ -6,6 +6,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 
 include_once '../../config/DB.php';
 include_once '../../models/Quiz.php';
+include_once '../../models/Question.php';
 include_once '../../utils/CommonFunction.php';
 include_once '../../utils/ErrorMessages.php';
 
@@ -17,6 +18,8 @@ $db = $database->getConnection();
 $data = json_decode(file_get_contents('php://input'), true);
 
 $quiz = new Quiz($db);
+$question = new Question($db);
+
 $result;
 
 $id = uniqid();
@@ -24,11 +27,17 @@ $title = isset($data['title']) ? CommonFunction::testInput($data['title']) : '';
 $description = isset($data['description']) ? CommonFunction::testInput($data['description']) : '';
 $maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore']) : '';
 $levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : '';
+$title = isset($data['QuestionTitle']) ? CommonFunction::testInput($data['title']) : '';
+$points = isset($data['points']) ? CommonFunction::testInput($data['points']) : '';
+$picture = isset($data['picture']) ? CommonFunction::testInput($data['picture']) : '';
+$isText = isset($data['isText']) ? CommonFunction::testInput($data['isText']) : '';
+$quizId = $id;
 
 try {
     validateParams($title, $description, $levelId, $maxScore);
 
     $quiz = $quiz->createQuiz($id, $title, $description, $levelId, $maxScore);
+    $question = $question->createQuestion($id, $title, $points, $quizId, $picture);
     
     $result = CommonFunction::createSuccessObject($quiz);
 } catch (InvalidArgumentException $e) {
