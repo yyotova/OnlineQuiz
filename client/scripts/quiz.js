@@ -19,7 +19,7 @@
       let quizInfo = JSON.parse(xhr.responseText);
       let quizData = quizInfo.data;
 
-      for (let i = 0; i < quizData.length; i++) {
+      for (let i = 0; i < quizData?.length; i++) {
         const questionTitle = quizData[i].title;
         const questionAnswer = quizData[i].content;
         const questionAnswerId = quizData[i].answer_id;
