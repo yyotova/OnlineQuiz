@@ -5,7 +5,7 @@
   const id = urlParams.get("id");
   xhr.open(
     "GET",
-    `http://localhost/OnlineQuiz/api/quiz/getQuizById.php?id=${id}`,
+    `http://localhost:8080/OnlineQuiz/api/quiz/getQuizById.php?id=${id}`,
     true
   );
 
