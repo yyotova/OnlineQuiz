@@ -37,10 +37,32 @@ class Quiz
         return $quiz;
     }
 
+    public function getAllQuizes()
+    {
+      $sql = 'SELECT * FROM quizes';
+      $stmt = $this->connection->prepare($sql);
+      $stmt->execute();
+  
+      $quizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  
+      if (empty($quizes)) {
+        throw new InvalidArgumentException('No quizes!');
+      }
+  
+      return $quizes;
+    }
+
     public function createQuiz($id, $title, $description, $levelId, $maxScore)
     {
-        $quizLevel = new Level($this->connection);
-        $quizLevel->getLevelById($levelId);
+        // $quizLevel = new Level($this->connection);
+        // $quizLevel->getLevelById($levelId);
+        if (strtolower($levelId) == 'hard') {
+            $levelId = '07f32f0e-c510-11eb-8529-0242ac130003';
+        } elseif (strtolower($levelId) == 'medium') {
+            $levelId = 'd3ca928a-c50f-11eb-8529-0242ac130003';
+        } else {
+            $levelId = 'd3ca906e-c50f-11eb-8529-0242ac130003';
+        }
 
         return $this->insertQuizQuery($id, $title, $description, $levelId, $maxScore);
     }
