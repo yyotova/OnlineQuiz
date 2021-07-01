@@ -37,7 +37,7 @@ class Question
     public function createQuestion($id, $title, $points, $quizId, $picture)
     {
         $quiz = new Quiz($this->connection);
-        $quiz->getQuizById($quizId);
+        // $quiz->getQuizById($quizId);
 
         return $this->insertQuestionQuery($id, $title, $points, $quizId, $picture);
     }

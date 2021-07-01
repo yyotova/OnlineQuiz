@@ -10,13 +10,21 @@ const addQuiz = function() {
   const description = document.getElementById('description').value;
   const maxScore = document.getElementById('maxScore').value;
   const levelId = document.getElementById('levelId').value;
+  const QuestionTitle = document.getElementById('QuestionTitle').value;
+  const points = document.getElementById('points').value;
+  const isText = document.getElementById('isText').value;
 
   const params = {
     'title': title,
     'description': description,
     'maxScore': maxScore,
-    'levelId': levelId
+    'levelId': levelId,
+    'questionTitle': QuestionTitle,
+    'points': points,
+    'isText': isText
   };
+
+  console.log(params);
 
   xhr.send(JSON.stringify(params));
 }

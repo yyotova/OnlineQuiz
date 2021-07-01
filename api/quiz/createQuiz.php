@@ -27,19 +27,19 @@ $title = isset($data['title']) ? CommonFunction::testInput($data['title']) : '';
 $description = isset($data['description']) ? CommonFunction::testInput($data['description']) : '';
 $maxScore = isset($data['maxScore']) ? CommonFunction::testInput($data['maxScore']) : '';
 $levelId = isset($data['levelId']) ? CommonFunction::testInput($data['levelId']) : '';
-$title = isset($data['QuestionTitle']) ? CommonFunction::testInput($data['title']) : '';
+$questionTitle = isset($data['questionTitle']) ? CommonFunction::testInput($data['title']) : '';
 $points = isset($data['points']) ? CommonFunction::testInput($data['points']) : '';
 $picture = isset($data['picture']) ? CommonFunction::testInput($data['picture']) : '';
-$isText = isset($data['isText']) ? CommonFunction::testInput($data['isText']) : '';
-$quizId = $id;
+$quizId = uniqid();
 
 try {
     validateParams($title, $description, $levelId, $maxScore);
 
     $quiz = $quiz->createQuiz($id, $title, $description, $levelId, $maxScore);
-    $question = $question->createQuestion($id, $title, $points, $quizId, $picture);
+    $question = $question->createQuestion($quizId, $questionTitle, $points, $id, $picture);
     
     $result = CommonFunction::createSuccessObject($quiz);
+    print_r(CommonFunction::createSuccessObject($question));
 } catch (InvalidArgumentException $e) {
     $result = CommonFunction::createErrorObject($e->getMessage());
 } catch (PDOException $e) {
