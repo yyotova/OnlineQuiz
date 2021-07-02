@@ -12,7 +12,6 @@ const addQuiz = function() {
   const levelId = document.getElementById('levelId').value;
   const QuestionTitle = document.getElementById('QuestionTitle').value;
   const points = document.getElementById('points').value;
-  const isText = document.getElementById('isText').value;
 
   const params = {
     'title': title,
@@ -21,7 +20,6 @@ const addQuiz = function() {
     'levelId': levelId,
     'questionTitle': QuestionTitle,
     'points': points,
-    'isText': isText
   };
 
   console.log(params);

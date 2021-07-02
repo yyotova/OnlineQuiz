@@ -1,6 +1,6 @@
 (() => {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://localhost:8080/OnlineQuiz/api/quiz/getAllQuizes.php", true);
+  xhr.open("GET", "http://localhost/OnlineQuiz/api/quiz/getAllQuizes.php", true);
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {

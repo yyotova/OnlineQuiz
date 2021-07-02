@@ -4,7 +4,7 @@
   const id = urlParams.get("id");
   xhr.open(
     "GET",
-    `http://localhost:8080/OnlineQuiz/api/quiz/getQuizById.php?id=${id}`,
+    `http://localhost/OnlineQuiz/api/quiz/getQuizById.php?id=${id}`,
     true
   );
 
@@ -101,7 +101,7 @@
   xhr.send();
 
   const myForm = document.getElementById("quiz-form");
-  const endpoint = "http://localhost:8080/OnlineQuiz/api/answer/setAnswer.php";
+  const endpoint = "http://localhost/OnlineQuiz/api/answer/setAnswer.php";
   const userId = '60bca4a76d933';
 
   myForm.addEventListener("submit", () => {
